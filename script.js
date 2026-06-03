@@ -119,7 +119,21 @@ function deleteBookmark(index) {
   displayBookmarks();
 }
 
+// share bookmark function;
+function shareBookmark(index) {
+  const bookmarks = getData(currentUser) || [];
+  if(navigator.share){
+    navigator.share({
+      title: siteTitle,
+      url: siteUrl
+    })
+  }else{
+    alert("This browser does not support sharing !");
+  }
+}
+
 // load data automatically;
 window.onload = loadUsers;
 window.deleteBookmark = deleteBookmark;
 window.copyToClipboard = copyToClipboard;
+window.shareBookmark = shareBookmark;
