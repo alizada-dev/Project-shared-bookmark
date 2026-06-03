@@ -44,7 +44,7 @@ userSelect.addEventListener("change", (e) => {
 
 // display bookmarks function;
 function displayBookmarks() {
-  const bookmarks = getData(currentUser) || [];
+  const bookmarks = getData(currentUser) || []; // avoids returning null;
   bookmarks.sort((a, b) => {
     return new Date(b.timeStamp) - new Date(a.timeStamp);
   });
@@ -69,6 +69,13 @@ function displayBookmarks() {
     `;
   });
 }
+
+// submit button event;
+bookmarkForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!currentUser) return;
+  addBookmark();
+});
 
 // load data automatically;
 window.onload = loadUsers;
