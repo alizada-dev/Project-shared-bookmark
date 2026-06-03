@@ -103,9 +103,17 @@ function addBookmark() {
   displayBookmarks();
 }
 
+// copy bookmark function;
+function copyToClipboard(index) {
+  const bookmarks = getData(currentUser) || [];
+  const urlToCopy = bookmarks[index].siteUrl;
+  navigator.clipboard.writeText(urlToCopy);
+  alert("URL Copied !");
+}
+
 // delete bookmark function;
 function deleteBookmark(index) {
-  const bookmarks = getData(currentUser);
+  const bookmarks = getData(currentUser) || [];
   bookmarks.splice(index, 1);
   setData(currentUser, bookmarks);
   displayBookmarks();
@@ -114,3 +122,4 @@ function deleteBookmark(index) {
 // load data automatically;
 window.onload = loadUsers;
 window.deleteBookmark = deleteBookmark;
+window.copyToClipboard = copyToClipboard;
