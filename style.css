@@ -68,6 +68,14 @@ body {
   border-radius: 10px;
   background-color: silver;
   color: whitesmoke;
+  text-align: center;
+}
+.bookmarks-box h2 {
+  padding: 10px;
+  margin: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
 }
 
 .bookmark-details {
@@ -76,6 +84,7 @@ body {
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 10px;
+  text-align: left;
 }
 
 .time-stamp {
