@@ -104,6 +104,11 @@ body {
 .site-url {
   text-decoration: none;
 }
+
+.like-counter {
+  margin: 20px 0px;
+  font-size: 14px;
+}
 .bookmark-span {
   display: flex;
   flex-direction: row;

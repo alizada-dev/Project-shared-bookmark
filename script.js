@@ -55,10 +55,11 @@ function displayBookmarks() {
     <a class="site-title" href="${bookmark.siteUrl}">${bookmark.siteName}</a>
     <p class="site-desc">${bookmark.siteDescription}</p>
     <h3 class="time-stamp">${bookmark.timeStamp}</h3>
+    <span class="like-counter" onclick=likeCounter(${index})>Like</span>
     <div class="bookmark-span">
-    <span onclick="copyToClipboard(${index})">Copy</span>
-    <span onclick="shareBookmark(${index})">Share</span>
-    <span onclick="deleteBookmark(${index})">Delete</span>
+    <span onclick="copyToClipboard(${bookmark.id})">Copy</span>
+    <span onclick="shareBookmark(${bookmark.id})">Share</span>
+    <span onclick="deleteBookmark(${bookmark.id})">Delete</span>
     </div>
     </div>
     `;
@@ -82,6 +83,7 @@ function addBookmark() {
     siteName: siteTitle.value,
     siteDescription: siteDescription.value,
     siteUrl: siteUrl.value,
+    id: Date.now(),
     createdAt: Date.now(),
     timeStamp: new Date().toLocaleDateString("en-GB", {
       day: "numeric",
@@ -103,31 +105,36 @@ function addBookmark() {
   displayBookmarks();
 }
 
+// like increment counter function;
+function likeCounter() {}
+
 // copy bookmark function;
-function copyToClipboard(index) {
+function copyToClipboard(id) {
   const bookmarks = getData(currentUser) || [];
-  const urlToCopy = bookmarks[index].siteUrl;
-  navigator.clipboard.writeText(urlToCopy);
-  alert("URL Copied !");
+  const bookmark = bookmarks.find((bookmark) => bookmark.id === id);
+  navigator.clipboard.writeText(bookmark.siteUrl);
+  alert("URL Copied");
 }
 
 // delete bookmark function;
-function deleteBookmark(index) {
+function deleteBookmark(id) {
   const bookmarks = getData(currentUser) || [];
-  bookmarks.splice(index, 1);
-  setData(currentUser, bookmarks);
+  const updatedBookmarks = bookmarks.filter((bookmark) => bookmark.id !== id);
+
+  setData(currentUser, updatedBookmarks);
   displayBookmarks();
 }
 
 // share bookmark function;
-function shareBookmark(index) {
+function shareBookmark(id) {
   const bookmarks = getData(currentUser) || [];
-  if(navigator.share){
+  const bookmark = bookmarks.find((bookmark) => bookmark.id === id);
+  if (navigator.share) {
     navigator.share({
-      title: siteTitle,
-      url: siteUrl
-    })
-  }else{
+      title: bookmark.siteTitle,
+      url: bookmark.siteUrl
+    });
+  } else {
     alert("This browser does not support sharing !");
   }
 }
@@ -137,3 +144,4 @@ window.onload = loadUsers;
 window.deleteBookmark = deleteBookmark;
 window.copyToClipboard = copyToClipboard;
 window.shareBookmark = shareBookmark;
+window.likeCounter = likeCounter;
