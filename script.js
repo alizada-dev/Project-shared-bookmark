@@ -45,14 +45,9 @@ userSelect.addEventListener("change", (e) => {
 // display bookmarks function;
 function displayBookmarks() {
   const bookmarks = getData(currentUser) || []; // avoids returning null;
-  bookmarks.sort((a, b) => {
-    return new Date(b.timeStamp) - new Date(a.timeStamp);
-  });
+  bookmarks.sort((a, b) => b.createdAt - a.createdAt);
   bookmarksBox.innerHTML = "";
-
-  const savedBookmarkTitle = document.createElement("h2");
-  savedBookmarkTitle.textContent = "Saved Bookmarks";
-  bookmarksBox.appendChild(savedBookmarkTitle);
+  bookmarksBox.innerHTML = `<h2>Saved Bookmarks</h2>`;
 
   bookmarks.forEach((bookmark, index) => {
     bookmarksBox.innerHTML += `
@@ -77,5 +72,45 @@ bookmarkForm.addEventListener("submit", (e) => {
   addBookmark();
 });
 
+// add new bookmark function;
+function addBookmark() {
+  if (!currentUser) return;
+  const bookmarks = getData(currentUser) || []; // get old bookmarks;
+
+  // add new bookmark to the storage;
+  bookmarks.push({
+    siteName: siteTitle.value,
+    siteDescription: siteDescription.value,
+    siteUrl: siteUrl.value,
+    createdAt: Date.now(),
+    timeStamp: new Date().toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    })
+  });
+
+  setData(currentUser, bookmarks); // saving the new bookmark;
+
+  // reset the inputs;
+  siteTitle.value = "";
+  siteDescription.value = "";
+  siteUrl.value = "";
+
+  bookmarksBox.style.display = "block";
+
+  // display the new bookmark and olds;
+  displayBookmarks();
+}
+
+// delete bookmark function;
+function deleteBookmark(index) {
+  const bookmarks = getData(currentUser);
+  bookmarks.splice(index, 1);
+  setData(currentUser, bookmarks);
+  displayBookmarks();
+}
+
 // load data automatically;
 window.onload = loadUsers;
+window.deleteBookmark = deleteBookmark;
