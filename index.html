@@ -1,15 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Shared Bookmark</title>
-</head>
-<body>
-    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Shared Bookmark</h1>
+      <div class="dropdown">
+        <label for="select-user">Select a user to see bookmarks</label>
+        <select class="select" id="select-user">
+          <option value="" selected disabled>Select a user</option>
+        </select>
+      </div>
 
+      <form id="bookmark-form">
+        <h2>Add new bookmark</h2>
+        <label for="site-title">Write Website Title</label>
+        <input type="text" id="site-title" required />
+        <br />
+        <br />
+        <label for="site-description">Website Description</label>
+        <textarea id="site-description" required></textarea>
+        <br /><br />
+        <label for="site-url">Enter Website URL</label>
+        <input type="text" id="site-url" required />
+        <br />
+        <br />
+        <button type="submit" id="submit-btn">Submit</button>
+      </form>
+      <br />
+      <div class="bookmarks-box" id="bookmarks-box">
+      </div>
+    </div>
 
-    <script src="script.js"></script>
-    <script src="storage.js"></script>
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
