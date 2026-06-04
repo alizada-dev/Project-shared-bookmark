@@ -116,6 +116,8 @@ function liked(id) {
         (bookmark) => bookmark.id === id
     );
 
+    bookmark.likes = bookmark.likes || 0;
+
     bookmark.likes++;
 
     setData(currentUser, bookmarks);
