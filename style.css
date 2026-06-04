@@ -16,15 +16,21 @@ body {
   flex-direction: column;
   align-items: stretch;
   margin: 50px auto;
-  background: skyblue;
+  background: rgb(155, 139, 225);
   padding: 20px;
   border-radius: 10px;
 }
 .container h1 {
   margin: 30px;
+  text-align: center;
+  color: #242222;
 }
 .dropdown {
   width: 100%;
+}
+.dropdown label {
+  margin-top: 25px;
+  padding: 10px;
 }
 .select {
   width: 100%;
@@ -56,6 +62,13 @@ body {
   border-radius: 10px;
   border: none;
   outline: none;
+}
+
+#bookmark-form button {
+  background: green;
+  font-size: 20px;
+  font-weight: 400;
+  color: whitesmoke;
 }
 
 .bookmarks-box {
@@ -100,14 +113,17 @@ body {
   display: block;
   margin-bottom: 5px;
   text-decoration: none;
+  cursor: pointer;
 }
+
 .site-url {
   text-decoration: none;
 }
 
-.like-counter {
-  margin: 20px 0px;
+.like-btn {
+  margin-top: 10px;
   font-size: 14px;
+  padding: 2px 5px;
 }
 .bookmark-span {
   display: flex;
