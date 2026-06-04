@@ -3,10 +3,6 @@
 This is collaborative web application that allows users to view, create, and interact with bookmarks. Users can select from a list of predefined users, browse their bookmarks, create new bookmarks, copy bookmark URLs to the clipboard, and like bookmarks. All bookmark and like data persists locally between browser sessions. on top of testing our basic DOM manipulation it was also meant to test our ability to create user stories from requirements and use them to create reasonably sized tickets.
 We used the kanban method for agile development because of the short timeframe within which we had to come up with an mvp.
 
-## Live Demo
-
-**Deployed Website:** [Add deployment URL here]
-
 ## Repository
 
 **GitHub Repository:** (https://github.com/alizada-dev/Project-shared-bookmark)
