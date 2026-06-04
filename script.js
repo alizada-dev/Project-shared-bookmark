@@ -55,7 +55,9 @@ function displayBookmarks() {
     <a class="site-title" href="${bookmark.siteUrl}">${bookmark.siteName}</a>
     <p class="site-desc">${bookmark.siteDescription}</p>
     <h3 class="time-stamp">${bookmark.timeStamp}</h3>
-    <span class="like-counter" onclick=likeCounter(${index})>Like</span>
+
+    <button onclick="liked(${bookmark.id})"> Like <span>${bookmark.likes}</span> </button>
+
     <div class="bookmark-span">
     <span onclick="copyToClipboard(${bookmark.id})">Copy</span>
     <span onclick="shareBookmark(${bookmark.id})">Share</span>
@@ -84,6 +86,7 @@ function addBookmark() {
     siteDescription: siteDescription.value,
     siteUrl: siteUrl.value,
     id: Date.now(),
+    likes: 0,
     createdAt: Date.now(),
     timeStamp: new Date().toLocaleDateString("en-GB", {
       day: "numeric",
@@ -106,7 +109,19 @@ function addBookmark() {
 }
 
 // like increment counter function;
-function likeCounter() {}
+function liked(id) {
+    const bookmarks = getData(currentUser) || [];
+    
+    const bookmark = bookmarks.find(
+        (bookmark) => bookmark.id === id
+    );
+
+    bookmark.likes++;
+
+    setData(currentUser, bookmarks);
+
+    displayBookmarks();
+}
 
 // copy bookmark function;
 function copyToClipboard(id) {
@@ -144,4 +159,4 @@ window.onload = loadUsers;
 window.deleteBookmark = deleteBookmark;
 window.copyToClipboard = copyToClipboard;
 window.shareBookmark = shareBookmark;
-window.likeCounter = likeCounter;
+window.liked = liked;
